@@ -1,0 +1,35 @@
+name: Deploy Production
+
+run-name: Deploy production from ${{ github.ref_name }} by @${{ github.actor }}
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout selected ref
+        uses: actions/checkout@v7
+
+      - name: Log deploy target
+        run: |
+          echo "Deploying branch: ${{ github.ref_name }}"
+          echo "Commit SHA: $(git rev-parse HEAD)"
+          echo "Actor: ${{ github.actor }}"
+
+      - name: Trigger Render deploy hook
+        env:
+          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+        run: |
+          curl --fail --silent --show-error \
+            --request POST \
+            "$RENDER_DEPLOY_HOOK"
