@@ -81,18 +81,20 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    database: ruby_on_rails_production
-    username: ruby_on_rails
-    password: <%= ENV["RUBY_ON_RAILS_DATABASE_PASSWORD"] %>
+    host: <%= ENV["DB_HOST"] %>
+    port: <%= ENV.fetch("DB_PORT", 5432) %>
+    database: <%= ENV["DB_NAME"] %>
+    username: <%= ENV["DB_USERNAME"] %>
+    password: <%= ENV["DB_PASSWORD"] %>
   cache:
     <<: *primary_production
-    database: ruby_on_rails_production_cache
+    database: <%= "#{ENV["DB_NAME"]}_cache" %>
     migrations_paths: db/cache_migrate
   queue:
     <<: *primary_production
-    database: ruby_on_rails_production_queue
+    database: <%= "#{ENV["DB_NAME"]}_queue" %>
     migrations_paths: db/queue_migrate
   cable:
     <<: *primary_production
-    database: ruby_on_rails_production_cable
+    database: <%= "#{ENV["DB_NAME"]}_cable" %>
     migrations_paths: db/cable_migrate
