@@ -9,7 +9,7 @@ module ApiAuthentication
     token = bearer_token
     return render_error(message: I18n.t("auth.missing_token"), errors: [ "Unauthorized" ], status: :unauthorized) if token.blank?
 
-    payload = JwtService.decode(token)
+    payload = JwtService.decode_access(token)
     user = User.find_by(id: payload["sub"])
     return render_error(message: I18n.t("auth.invalid_token"), errors: [ "Unauthorized" ], status: :unauthorized) if user.nil?
 

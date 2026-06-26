@@ -2,6 +2,9 @@ en:
   auth:
     login_success: "Login successful"
     login_failed: "Invalid email or password"
+    refresh_success: "Session refreshed"
+    refresh_failed: "Invalid refresh token"
+    logout_success: "Logged out"
     unauthorized: "Unauthorized"
     missing_token: "Missing token"
     invalid_token: "Invalid token"

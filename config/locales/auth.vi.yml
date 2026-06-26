@@ -2,6 +2,9 @@ vi:
   auth:
     login_success: "Đăng nhập thành công"
     login_failed: "Sai email hoặc mật khẩu"
+    refresh_success: "Làm mới phiên đăng nhập thành công"
+    refresh_failed: "Refresh token không hợp lệ"
+    logout_success: "Đăng xuất thành công"
     unauthorized: "Chưa đăng nhập"
     missing_token: "Thiếu token"
     invalid_token: "Token không hợp lệ"

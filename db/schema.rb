@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_26_090040) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_26_100000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -20,7 +20,23 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_26_090040) do
     t.string "key", null: false
     t.datetime "updated_at", null: false
     t.string "value", null: false
-    t.index ["key"], name: "index_permissions_on_key", unique: true
+    t.index [ "key" ], name: "index_permissions_on_key", unique: true
+  end
+
+  create_table "refresh_tokens", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "expires_at", null: false
+    t.string "jti", null: false
+    t.string "replaced_by_jti"
+    t.datetime "revoked_at"
+    t.string "token_digest", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index [ "expires_at" ], name: "index_refresh_tokens_on_expires_at"
+    t.index [ "jti" ], name: "index_refresh_tokens_on_jti", unique: true
+    t.index [ "revoked_at" ], name: "index_refresh_tokens_on_revoked_at"
+    t.index [ "token_digest" ], name: "index_refresh_tokens_on_token_digest", unique: true
+    t.index [ "user_id" ], name: "index_refresh_tokens_on_user_id"
   end
 
   create_table "role_permissions", force: :cascade do |t|
@@ -28,9 +44,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_26_090040) do
     t.bigint "permission_id", null: false
     t.bigint "role_id", null: false
     t.datetime "updated_at", null: false
-    t.index ["permission_id"], name: "index_role_permissions_on_permission_id"
-    t.index ["role_id", "permission_id"], name: "index_role_permissions_on_role_id_and_permission_id", unique: true
-    t.index ["role_id"], name: "index_role_permissions_on_role_id"
+    t.index [ "permission_id" ], name: "index_role_permissions_on_permission_id"
+    t.index [ "role_id", "permission_id" ], name: "index_role_permissions_on_role_id_and_permission_id", unique: true
+    t.index [ "role_id" ], name: "index_role_permissions_on_role_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -40,8 +56,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_26_090040) do
     t.boolean "is_admin", default: false, null: false
     t.string "name", null: false
     t.datetime "updated_at", null: false
-    t.index ["code"], name: "index_roles_on_code", unique: true
-    t.index ["is_admin"], name: "index_roles_on_is_admin"
+    t.index [ "code" ], name: "index_roles_on_code", unique: true
+    t.index [ "is_admin" ], name: "index_roles_on_is_admin"
   end
 
   create_table "user_roles", force: :cascade do |t|
@@ -49,9 +65,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_26_090040) do
     t.bigint "role_id", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
-    t.index ["role_id"], name: "index_user_roles_on_role_id"
-    t.index ["user_id", "role_id"], name: "index_user_roles_on_user_id_and_role_id", unique: true
-    t.index ["user_id"], name: "index_user_roles_on_user_id"
+    t.index [ "role_id" ], name: "index_user_roles_on_role_id"
+    t.index [ "user_id", "role_id" ], name: "index_user_roles_on_user_id_and_role_id", unique: true
+    t.index [ "user_id" ], name: "index_user_roles_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -61,9 +77,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_26_090040) do
     t.string "name", null: false
     t.string "password_digest", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index [ "email" ], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "refresh_tokens", "users"
   add_foreign_key "role_permissions", "permissions"
   add_foreign_key "role_permissions", "roles"
   add_foreign_key "user_roles", "roles"
