@@ -19,6 +19,6 @@ class ApplicationController < ActionController::API
     return if locale.blank?
 
     candidate = locale.to_s.downcase.to_sym
-    return candidate if I18n.available_locales.include?(candidate)
+    candidate if I18n.available_locales.include?(candidate)
   end
 end

@@ -1,0 +1,8 @@
+pre-commit:
+  commands:
+    rubocop:
+      stage_fixed: true
+      run: >
+        git diff --cached --name-only --diff-filter=ACMR -z --
+        '*.rb' '*.rake' '*.ru' '*.gemspec' 'Gemfile' 'Rakefile'
+        | xargs -0 --no-run-if-empty bundle exec rubocop -A
