@@ -1,0 +1,8 @@
+en:
+  auth:
+    login_success: "Login successful"
+    login_failed: "Invalid email or password"
+    unauthorized: "Unauthorized"
+    missing_token: "Missing token"
+    invalid_token: "Invalid token"
+    token_expired: "Token expired"

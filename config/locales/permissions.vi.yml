@@ -1,0 +1,5 @@
+vi:
+  permissions:
+    created: "Tạo quyền thành công"
+    updated: "Cập nhật quyền thành công"
+    deleted: "Xóa quyền thành công"

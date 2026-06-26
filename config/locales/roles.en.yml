@@ -1,0 +1,8 @@
+en:
+  roles:
+    created: "Role created"
+    updated: "Role updated"
+    deleted: "Role deleted"
+    admin_readonly: "Bootstrap admin role is protected (name/code cannot be changed)"
+    admin_cannot_delete: "Cannot delete bootstrap admin role"
+    admin_requires_permissions: "Bootstrap admin role must keep at least one permission"

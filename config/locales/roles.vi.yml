@@ -1,0 +1,8 @@
+vi:
+  roles:
+    created: "Tạo vai trò thành công"
+    updated: "Cập nhật vai trò thành công"
+    deleted: "Xóa vai trò thành công"
+    admin_readonly: "Không được sửa name/code/is_admin của role bootstrap admin"
+    admin_cannot_delete: "Không được xóa role bootstrap admin"
+    admin_requires_permissions: "Role bootstrap admin không được mất toàn bộ quyền"

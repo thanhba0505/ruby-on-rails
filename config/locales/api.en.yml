@@ -1,0 +1,12 @@
+en:
+  common:
+    fetch_success: "Success"
+    created_success: "Created successfully"
+    updated_success: "Updated successfully"
+    deleted_success: "Deleted successfully"
+    validation_failed: "Validation failed"
+    invalid_params: "Invalid parameters"
+  errors:
+    not_found: "Not found"
+    parameter_missing: "Missing parameter"
+    parameter_missing_detail: "Missing parameter: %{param}"

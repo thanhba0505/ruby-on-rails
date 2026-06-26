@@ -1,0 +1,5 @@
+vi:
+  permission:
+    denied: "Không có quyền truy cập"
+    role_assigned: "Đã gán vai trò"
+    permission_assigned: "Đã gán quyền"

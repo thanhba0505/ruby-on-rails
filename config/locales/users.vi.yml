@@ -1,0 +1,8 @@
+vi:
+  users:
+    created: "Tạo người dùng thành công"
+    updated: "Cập nhật người dùng thành công"
+    deleted: "Xóa người dùng thành công"
+    admin_readonly: "Không được sửa thông tin bootstrap admin (chỉ cho phép đổi mật khẩu)"
+    admin_cannot_delete: "Không được xóa user bootstrap admin"
+    admin_requires_admin_role: "User bootstrap admin phải có ít nhất 1 role is_admin"

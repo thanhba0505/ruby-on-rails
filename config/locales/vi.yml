@@ -1,0 +1,26 @@
+vi:
+  errors:
+    messages:
+      blank: "không được để trống"
+      taken: "đã được sử dụng"
+      invalid: "không hợp lệ"
+      confirmation: "không khớp"
+  activerecord:
+    models:
+      user: "Người dùng"
+      role: "Vai trò"
+      permission: "Quyền"
+    attributes:
+      user:
+        name: "Tên"
+        email: "Email"
+        password: "Mật khẩu"
+        password_confirmation: "Xác nhận mật khẩu"
+      role:
+        name: "Tên"
+        code: "Mã"
+        description: "Mô tả"
+      permission:
+        key: "Mã quyền"
+        value: "Tên quyền"
+        description: "Mô tả"

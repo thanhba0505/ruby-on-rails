@@ -1,0 +1,12 @@
+vi:
+  common:
+    fetch_success: "Thành công"
+    created_success: "Tạo thành công"
+    updated_success: "Cập nhật thành công"
+    deleted_success: "Xóa thành công"
+    validation_failed: "Dữ liệu không hợp lệ"
+    invalid_params: "Tham số không hợp lệ"
+  errors:
+    not_found: "Không tìm thấy"
+    parameter_missing: "Thiếu tham số"
+    parameter_missing_detail: "Thiếu tham số: %{param}"

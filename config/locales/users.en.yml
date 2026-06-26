@@ -1,0 +1,8 @@
+en:
+  users:
+    created: "User created"
+    updated: "User updated"
+    deleted: "User deleted"
+    admin_readonly: "Bootstrap admin user is protected (only password can be changed)"
+    admin_cannot_delete: "Cannot delete bootstrap admin user"
+    admin_requires_admin_role: "Bootstrap admin user must keep at least one admin role"
