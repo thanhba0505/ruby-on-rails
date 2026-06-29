@@ -1,6 +1,6 @@
 name: Deploy to Render
 
-run-name: Deploy: ${{ github.ref_name }} - ${{ github.event.head_commit.message }}
+run-name: "Deploy: ${{ github.ref_name }} - ${{ github.event.head_commit.message }}"
 
 on:
   workflow_run:
