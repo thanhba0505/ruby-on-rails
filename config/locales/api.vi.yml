@@ -10,3 +10,5 @@ vi:
     not_found: "Không tìm thấy"
     parameter_missing: "Thiếu tham số"
     parameter_missing_detail: "Thiếu tham số: %{param}"
+  uploads:
+    failed: "Upload file thất bại"

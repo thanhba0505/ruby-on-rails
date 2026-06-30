@@ -28,6 +28,10 @@ module Api
       rescue_from JwtService::InvalidTokenError do
         render_error(message: I18n.t("auth.invalid_token"), errors: [ "Unauthorized" ], status: :unauthorized)
       end
+
+      rescue_from Uploads::CloudinaryUploader::Error do |e|
+        render_error(message: I18n.t("uploads.failed"), errors: [ e.message ], status: :unprocessable_entity)
+      end
     end
   end
 end

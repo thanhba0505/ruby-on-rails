@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_29_120020) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_30_130000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -72,6 +72,27 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_29_120020) do
     t.index [ "is_admin" ], name: "index_roles_on_is_admin"
   end
 
+  create_table "uploaded_files", force: :cascade do |t|
+    t.bigint "bytes"
+    t.string "content_type"
+    t.datetime "created_at", null: false
+    t.datetime "deleted_at"
+    t.string "folder"
+    t.string "format"
+    t.integer "height"
+    t.jsonb "metadata", default: {}, null: false
+    t.string "original_filename"
+    t.string "provider", default: "cloudinary", null: false
+    t.string "public_id", null: false
+    t.string "resource_type", default: "image", null: false
+    t.text "secure_url", null: false
+    t.datetime "updated_at", null: false
+    t.text "url"
+    t.integer "width"
+    t.index [ "deleted_at" ], name: "index_uploaded_files_on_deleted_at"
+    t.index [ "provider", "public_id" ], name: "index_uploaded_files_on_provider_and_public_id", unique: true
+  end
+
   create_table "user_desktop_apps", force: :cascade do |t|
     t.bigint "app_id", null: false
     t.datetime "created_at", null: false
@@ -108,12 +129,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_29_120020) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.bigint "avatar_id"
+    t.bigint "background_id"
     t.datetime "created_at", null: false
     t.string "email", null: false
     t.boolean "is_admin", default: false, null: false
     t.string "name", null: false
     t.string "password_digest", null: false
     t.datetime "updated_at", null: false
+    t.index [ "avatar_id" ], name: "index_users_on_avatar_id"
+    t.index [ "background_id" ], name: "index_users_on_background_id"
     t.index [ "email" ], name: "index_users_on_email", unique: true
   end
 
@@ -126,4 +151,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_29_120020) do
   add_foreign_key "user_roles", "users"
   add_foreign_key "user_taskbar_apps", "apps"
   add_foreign_key "user_taskbar_apps", "users"
+  add_foreign_key "users", "uploaded_files", column: "avatar_id"
+  add_foreign_key "users", "uploaded_files", column: "background_id"
 end

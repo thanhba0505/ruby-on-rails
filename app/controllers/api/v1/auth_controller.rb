@@ -97,12 +97,7 @@ module Api
       private
 
       def user_payload(user)
-        {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          is_admin: user.is_admin
-        }
+        UserPayloadBuilder.build(user)
       end
     end
   end

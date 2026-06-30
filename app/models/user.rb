@@ -1,6 +1,9 @@
 class User < ApplicationRecord
   has_secure_password
 
+  belongs_to :avatar, class_name: "UploadedFile", optional: true
+  belongs_to :background, class_name: "UploadedFile", optional: true
+
   has_many :user_roles, dependent: :destroy
   has_many :roles, through: :user_roles
   has_many :permissions, -> { distinct }, through: :roles

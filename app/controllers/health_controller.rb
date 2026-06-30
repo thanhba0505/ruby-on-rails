@@ -1,14 +1,24 @@
 class HealthController < ApplicationController
   def show
-    db_connected = database_connected?
+    checks = {
+      database: database_connected? ? "connected" : "disconnected"
+    }
 
-    render json: {
-      status: db_connected ? "ok" : "error",
-      database: db_connected ? "connected" : "disconnected"
-    }, status: db_connected ? :ok : :service_unavailable
+    if include_cloudinary_check?
+      checks[:cloudinary] = cloudinary_status
+    end
+
+    overall_ok = checks.values.all? { |status| %w[connected skipped].include?(status) }
+
+    render json: checks.merge(status: overall_ok ? "ok" : "error"),
+      status: overall_ok ? :ok : :service_unavailable
   end
 
   private
+
+  def include_cloudinary_check?
+    ActiveModel::Type::Boolean.new.cast(params[:include_cloudinary] || params[:cloudinary] || params[:full])
+  end
 
   def database_connected?
     ActiveRecord::Base.connection_pool.with_connection do |connection|
@@ -18,5 +28,16 @@ class HealthController < ApplicationController
     true
   rescue StandardError
     false
+  end
+
+  def cloudinary_status
+    return "skipped" unless Uploads::CloudinaryUploader.configured?
+
+    Timeout.timeout(3) do
+      response = Cloudinary::Api.ping
+      return response["status"] == "ok" ? "connected" : "disconnected"
+    end
+  rescue StandardError, Timeout::Error
+    "disconnected"
   end
 end

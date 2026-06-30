@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       post "auth/refresh", to: "auth#refresh"
       post "auth/logout", to: "auth#logout"
 
-      resource :me, only: %i[show] do
+      resource :me, only: %i[show update], controller: :me do
         resources :desktop_apps, only: %i[index create update destroy], param: :app_id do
           collection do
             put :positions

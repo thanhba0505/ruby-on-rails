@@ -10,3 +10,5 @@ en:
     not_found: "Not found"
     parameter_missing: "Missing parameter"
     parameter_missing_detail: "Missing parameter: %{param}"
+  uploads:
+    failed: "File upload failed"

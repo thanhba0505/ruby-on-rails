@@ -99,13 +99,7 @@ module Api
       end
 
       def user_payload(user)
-        {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          is_admin: user.is_admin,
-          roles: user.roles.select(:id, :name, :code, :is_admin).map(&:attributes)
-        }
+        UserPayloadBuilder.build(user, include_roles: true)
       end
     end
   end
