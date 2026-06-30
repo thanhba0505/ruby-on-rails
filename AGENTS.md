@@ -22,6 +22,8 @@ config/
   routes.rb                  # note singular `resource :me`
   locales/                   # vi/en API messages
   database.yml               # primary + cache/queue/cable DBs
+docs/
+  routes/*.jsonc             # API request/response contract examples by module
 db/
   migrate/
   seeds/
@@ -51,10 +53,11 @@ bin/
 
 - Keep changes aligned with existing patterns; avoid introducing parallel flows for the same concern.
 - Keep JSON payload keys stable unless the task explicitly changes the API contract.
-- Implement related layers together when needed: route, controller, params, service, model, response, and locale.
+- Implement related layers together when needed: route, controller, params, service, model, response, locale, and the affected files in `docs/routes/*.jsonc`.
 - Reuse existing concerns/services/builders before adding new ones.
 - Keep seed updates idempotent.
 - When adding a new message key, update both Vietnamese and English locale files unless there is a strong reason not to.
+- If you change any API route, request params, response payload, auth behavior, or permission requirement, update the affected files in `docs/routes/*.jsonc` in the same change.
 
 ## Env Rules
 

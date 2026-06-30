@@ -1,0 +1,572 @@
+{
+  "group": "me",
+  "base_path": "api/v1",
+  "auth_required": true,
+  "headers": {
+    "Authorization": "Bearer <access_token>"
+  },
+  "routes": [
+    {
+      "path": "api/v1/me",
+      "method": "GET",
+      "content_type": "application/json",
+      "request": {},
+      "response": {
+        "success": true,
+        "message": "Fetch successful",
+        "data": {
+          "user": {
+            "id": 1,
+            "name": "Thanh Ba",
+            "email": "thanhba@example.com",
+            "is_admin": false,
+            "settings": {
+              "icon_size": "medium"
+            },
+            "avatar_id": null,
+            "avatar": null,
+            "avatar_url": null,
+            "background_id": null,
+            "background": null,
+            "background_url": null,
+            "roles": [
+              {
+                "id": 2,
+                "name": "User",
+                "code": "user",
+                "is_admin": false
+              }
+            ],
+            "permissions": ["apps.read", "users.read"]
+          }
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/me",
+      "method": "PATCH",
+      "content_type": "multipart/form-data or application/json",
+      "request": {
+        "user": {
+          "name": "Thanh Ba",
+          "avatar": "<uploaded file>",
+          "background": "<uploaded file>",
+          "remove_avatar": false,
+          "remove_background": false,
+          "settings": {
+            "icon_size": "large"
+          }
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "User updated",
+        "data": {
+          "user": {
+            "id": 1,
+            "name": "Thanh Ba",
+            "email": "thanhba@example.com",
+            "is_admin": false,
+            "settings": {
+              "icon_size": "large"
+            },
+            "avatar_id": 10,
+            "avatar": {
+              "id": 10,
+              "provider": "cloudinary",
+              "public_id": "users/1/avatar/sample",
+              "resource_type": "image",
+              "format": "png",
+              "bytes": 12345,
+              "width": 256,
+              "height": 256,
+              "original_filename": "avatar.png",
+              "content_type": "image/png",
+              "folder": "users/1/avatar",
+              "url": "http://res.cloudinary.com/...",
+              "secure_url": "https://res.cloudinary.com/...",
+              "metadata": {},
+              "deleted_at": null
+            },
+            "avatar_url": "https://res.cloudinary.com/...",
+            "background_id": null,
+            "background": null,
+            "background_url": null,
+            "roles": [],
+            "permissions": []
+          }
+        },
+        "errors": null
+      },
+      "notes": [
+        "Use multipart/form-data when uploading avatar or background.",
+        "settings.icon_size only accepts small, medium, or large."
+      ]
+    },
+    {
+      "path": "api/v1/me",
+      "method": "PUT",
+      "content_type": "multipart/form-data or application/json",
+      "request": {
+        "user": {
+          "name": "Thanh Ba",
+          "avatar": "<uploaded file>",
+          "background": "<uploaded file>",
+          "remove_avatar": false,
+          "remove_background": false,
+          "settings": {
+            "icon_size": "large"
+          }
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "User updated",
+        "data": {
+          "user": {
+            "id": 1,
+            "name": "Thanh Ba",
+            "email": "thanhba@example.com",
+            "is_admin": false,
+            "settings": {
+              "icon_size": "large"
+            },
+            "avatar_id": null,
+            "avatar": null,
+            "avatar_url": null,
+            "background_id": null,
+            "background": null,
+            "background_url": null,
+            "roles": [],
+            "permissions": []
+          }
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/me/desktop_apps",
+      "method": "GET",
+      "content_type": "application/json",
+      "request": {},
+      "response": {
+        "success": true,
+        "message": "Fetch successful",
+        "data": {
+          "desktop_apps": [
+            {
+              "id": 1,
+              "app": {
+                "id": 1,
+                "code": "calendar",
+                "name": "Calendar",
+                "icon": "ri-calendar-line",
+                "description": "Calendar app",
+                "is_active": true
+              },
+              "grid_x": 0,
+              "grid_y": 0
+            }
+          ]
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/me/desktop_apps",
+      "method": "POST",
+      "content_type": "application/json",
+      "request": {
+        "desktop_app": {
+          "app_id": 1,
+          "grid_x": 0,
+          "grid_y": 0
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Fetch successful",
+        "data": {
+          "desktop_app": {
+            "id": 1,
+            "app": {
+              "id": 1,
+              "code": "calendar",
+              "name": "Calendar",
+              "icon": "ri-calendar-line",
+              "description": "Calendar app",
+              "is_active": true
+            },
+            "grid_x": 0,
+            "grid_y": 0
+          }
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/me/desktop_apps/:app_id",
+      "method": "PATCH",
+      "content_type": "application/json",
+      "request": {
+        "desktop_app": {
+          "grid_x": 1,
+          "grid_y": 2
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Fetch successful",
+        "data": {
+          "desktop_app": {
+            "id": 1,
+            "app": {
+              "id": 1,
+              "code": "calendar",
+              "name": "Calendar",
+              "icon": "ri-calendar-line",
+              "description": "Calendar app",
+              "is_active": true
+            },
+            "grid_x": 1,
+            "grid_y": 2
+          }
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/me/desktop_apps/:app_id",
+      "method": "PUT",
+      "content_type": "application/json",
+      "request": {
+        "desktop_app": {
+          "grid_x": 1,
+          "grid_y": 2
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Fetch successful",
+        "data": {
+          "desktop_app": {
+            "id": 1,
+            "app": {
+              "id": 1,
+              "code": "calendar",
+              "name": "Calendar",
+              "icon": "ri-calendar-line",
+              "description": "Calendar app",
+              "is_active": true
+            },
+            "grid_x": 1,
+            "grid_y": 2
+          }
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/me/desktop_apps/:app_id",
+      "method": "DELETE",
+      "content_type": "application/json",
+      "request": {},
+      "response": {
+        "success": true,
+        "message": "Fetch successful",
+        "data": {
+          "app_id": 1
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/me/desktop_apps/positions",
+      "method": "PATCH",
+      "content_type": "application/json",
+      "request": {
+        "desktop_apps": [
+          {
+            "app_id": 1,
+            "grid_x": 0,
+            "grid_y": 0
+          },
+          {
+            "app_id": 2,
+            "grid_x": 1,
+            "grid_y": 0
+          }
+        ]
+      },
+      "response": {
+        "success": true,
+        "message": "Fetch successful",
+        "data": {
+          "desktop_apps": [
+            {
+              "id": 1,
+              "app": {
+                "id": 1,
+                "code": "calendar",
+                "name": "Calendar",
+                "icon": "ri-calendar-line",
+                "description": "Calendar app",
+                "is_active": true
+              },
+              "grid_x": 0,
+              "grid_y": 0
+            }
+          ]
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/me/desktop_apps/positions",
+      "method": "PUT",
+      "content_type": "application/json",
+      "request": {
+        "desktop_apps": [
+          {
+            "app_id": 1,
+            "grid_x": 0,
+            "grid_y": 0
+          },
+          {
+            "app_id": 2,
+            "grid_x": 1,
+            "grid_y": 0
+          }
+        ]
+      },
+      "response": {
+        "success": true,
+        "message": "Fetch successful",
+        "data": {
+          "desktop_apps": [
+            {
+              "id": 1,
+              "app": {
+                "id": 1,
+                "code": "calendar",
+                "name": "Calendar",
+                "icon": "ri-calendar-line",
+                "description": "Calendar app",
+                "is_active": true
+              },
+              "grid_x": 0,
+              "grid_y": 0
+            }
+          ]
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/me/taskbar_apps",
+      "method": "GET",
+      "content_type": "application/json",
+      "request": {},
+      "response": {
+        "success": true,
+        "message": "Fetch successful",
+        "data": {
+          "taskbar_apps": [
+            {
+              "id": 1,
+              "app": {
+                "id": 1,
+                "code": "calendar",
+                "name": "Calendar",
+                "icon": "ri-calendar-line",
+                "description": "Calendar app",
+                "is_active": true
+              },
+              "position": 0
+            }
+          ]
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/me/taskbar_apps",
+      "method": "POST",
+      "content_type": "application/json",
+      "request": {
+        "taskbar_app": {
+          "app_id": 1,
+          "position": 0
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Fetch successful",
+        "data": {
+          "taskbar_app": {
+            "id": 1,
+            "app": {
+              "id": 1,
+              "code": "calendar",
+              "name": "Calendar",
+              "icon": "ri-calendar-line",
+              "description": "Calendar app",
+              "is_active": true
+            },
+            "position": 0
+          }
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/me/taskbar_apps/:app_id",
+      "method": "PATCH",
+      "content_type": "application/json",
+      "request": {
+        "taskbar_app": {
+          "position": 1
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Fetch successful",
+        "data": {
+          "taskbar_app": {
+            "id": 1,
+            "app": {
+              "id": 1,
+              "code": "calendar",
+              "name": "Calendar",
+              "icon": "ri-calendar-line",
+              "description": "Calendar app",
+              "is_active": true
+            },
+            "position": 1
+          }
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/me/taskbar_apps/:app_id",
+      "method": "PUT",
+      "content_type": "application/json",
+      "request": {
+        "taskbar_app": {
+          "position": 1
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Fetch successful",
+        "data": {
+          "taskbar_app": {
+            "id": 1,
+            "app": {
+              "id": 1,
+              "code": "calendar",
+              "name": "Calendar",
+              "icon": "ri-calendar-line",
+              "description": "Calendar app",
+              "is_active": true
+            },
+            "position": 1
+          }
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/me/taskbar_apps/:app_id",
+      "method": "DELETE",
+      "content_type": "application/json",
+      "request": {},
+      "response": {
+        "success": true,
+        "message": "Fetch successful",
+        "data": {
+          "app_id": 1
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/me/taskbar_apps/positions",
+      "method": "PATCH",
+      "content_type": "application/json",
+      "request": {
+        "taskbar_apps": [
+          {
+            "app_id": 1,
+            "position": 0
+          },
+          {
+            "app_id": 2,
+            "position": 1
+          }
+        ]
+      },
+      "response": {
+        "success": true,
+        "message": "Fetch successful",
+        "data": {
+          "taskbar_apps": [
+            {
+              "id": 1,
+              "app": {
+                "id": 1,
+                "code": "calendar",
+                "name": "Calendar",
+                "icon": "ri-calendar-line",
+                "description": "Calendar app",
+                "is_active": true
+              },
+              "position": 0
+            }
+          ]
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/me/taskbar_apps/positions",
+      "method": "PUT",
+      "content_type": "application/json",
+      "request": {
+        "taskbar_apps": [
+          {
+            "app_id": 1,
+            "position": 0
+          },
+          {
+            "app_id": 2,
+            "position": 1
+          }
+        ]
+      },
+      "response": {
+        "success": true,
+        "message": "Fetch successful",
+        "data": {
+          "taskbar_apps": [
+            {
+              "id": 1,
+              "app": {
+                "id": 1,
+                "code": "calendar",
+                "name": "Calendar",
+                "icon": "ri-calendar-line",
+                "description": "Calendar app",
+                "is_active": true
+              },
+              "position": 0
+            }
+          ]
+        },
+        "errors": null
+      }
+    }
+  ]
+}

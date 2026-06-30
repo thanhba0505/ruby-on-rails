@@ -1,0 +1,145 @@
+{
+  "group": "permissions",
+  "base_path": "api/v1",
+  "auth_required": true,
+  "headers": {
+    "Authorization": "Bearer <access_token>"
+  },
+  "routes": [
+    {
+      "path": "api/v1/permissions",
+      "method": "GET",
+      "permission": "permissions.read",
+      "content_type": "application/json",
+      "request": {},
+      "response": {
+        "success": true,
+        "message": "Fetch successful",
+        "data": {
+          "permissions": [
+            {
+              "id": 1,
+              "key": "users.read",
+              "value": "Read users",
+              "description": "Allow reading users"
+            }
+          ]
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/permissions",
+      "method": "POST",
+      "permission": "permissions.create",
+      "content_type": "application/json",
+      "request": {
+        "permission": {
+          "key": "reports.read",
+          "value": "Read reports",
+          "description": "Allow reading reports"
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Permission created",
+        "data": {
+          "permission": {
+            "id": 10,
+            "key": "reports.read",
+            "value": "Read reports",
+            "description": "Allow reading reports"
+          }
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/permissions/:id",
+      "method": "GET",
+      "permission": "permissions.read",
+      "content_type": "application/json",
+      "request": {},
+      "response": {
+        "success": true,
+        "message": "Fetch successful",
+        "data": {
+          "permission": {
+            "id": 1,
+            "key": "users.read",
+            "value": "Read users",
+            "description": "Allow reading users"
+          }
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/permissions/:id",
+      "method": "PATCH",
+      "permission": "permissions.update",
+      "content_type": "application/json",
+      "request": {
+        "permission": {
+          "key": "users.read",
+          "value": "Read users",
+          "description": "Updated description"
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Permission updated",
+        "data": {
+          "permission": {
+            "id": 1,
+            "key": "users.read",
+            "value": "Read users",
+            "description": "Updated description"
+          }
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/permissions/:id",
+      "method": "PUT",
+      "permission": "permissions.update",
+      "content_type": "application/json",
+      "request": {
+        "permission": {
+          "key": "users.read",
+          "value": "Read users",
+          "description": "Updated description"
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Permission updated",
+        "data": {
+          "permission": {
+            "id": 1,
+            "key": "users.read",
+            "value": "Read users",
+            "description": "Updated description"
+          }
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/permissions/:id",
+      "method": "DELETE",
+      "permission": "permissions.delete",
+      "content_type": "application/json",
+      "request": {},
+      "response": {
+        "success": true,
+        "message": "Permission deleted",
+        "data": {
+          "id": 1
+        },
+        "errors": null
+      }
+    }
+  ]
+}

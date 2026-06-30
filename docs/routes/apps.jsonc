@@ -1,0 +1,122 @@
+{
+  "group": "apps",
+  "base_path": "api/v1",
+  "auth_required": true,
+  "headers": {
+    "Authorization": "Bearer <access_token>"
+  },
+  "routes": [
+    {
+      "path": "api/v1/apps",
+      "method": "GET",
+      "permission": "apps.read",
+      "content_type": "application/json",
+      "request": {},
+      "response": {
+        "success": true,
+        "message": "Fetch successful",
+        "data": {
+          "apps": [
+            {
+              "id": 1,
+              "code": "calendar",
+              "name": "Calendar",
+              "icon": "ri-calendar-line",
+              "description": "Calendar app",
+              "is_active": true,
+              "placed_on_desktop": true,
+              "placed_on_taskbar": false
+            }
+          ]
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/apps/:id",
+      "method": "GET",
+      "permission": "apps.read",
+      "content_type": "application/json",
+      "request": {},
+      "response": {
+        "success": true,
+        "message": "Fetch successful",
+        "data": {
+          "app": {
+            "id": 1,
+            "code": "calendar",
+            "name": "Calendar",
+            "icon": "ri-calendar-line",
+            "description": "Calendar app",
+            "is_active": true,
+            "placed_on_desktop": true,
+            "placed_on_taskbar": false
+          }
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/apps/:id",
+      "method": "PATCH",
+      "permission": "apps.update",
+      "content_type": "application/json",
+      "request": {
+        "app": {
+          "name": "Calendar",
+          "icon": "ri-calendar-2-line",
+          "description": "Updated description",
+          "is_active": true
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "App updated",
+        "data": {
+          "app": {
+            "id": 1,
+            "code": "calendar",
+            "name": "Calendar",
+            "icon": "ri-calendar-2-line",
+            "description": "Updated description",
+            "is_active": true,
+            "placed_on_desktop": true,
+            "placed_on_taskbar": false
+          }
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/apps/:id",
+      "method": "PUT",
+      "permission": "apps.update",
+      "content_type": "application/json",
+      "request": {
+        "app": {
+          "name": "Calendar",
+          "icon": "ri-calendar-2-line",
+          "description": "Updated description",
+          "is_active": true
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "App updated",
+        "data": {
+          "app": {
+            "id": 1,
+            "code": "calendar",
+            "name": "Calendar",
+            "icon": "ri-calendar-2-line",
+            "description": "Updated description",
+            "is_active": true,
+            "placed_on_desktop": true,
+            "placed_on_taskbar": false
+          }
+        },
+        "errors": null
+      }
+    }
+  ]
+}

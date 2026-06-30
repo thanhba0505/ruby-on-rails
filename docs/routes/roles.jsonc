@@ -1,0 +1,211 @@
+{
+  "group": "roles",
+  "base_path": "api/v1",
+  "auth_required": true,
+  "headers": {
+    "Authorization": "Bearer <access_token>"
+  },
+  "routes": [
+    {
+      "path": "api/v1/roles",
+      "method": "GET",
+      "permission": "roles.read",
+      "content_type": "application/json",
+      "request": {},
+      "response": {
+        "success": true,
+        "message": "Fetch successful",
+        "data": {
+          "roles": [
+            {
+              "id": 1,
+              "name": "Administrator",
+              "code": "admin",
+              "description": "System administrator",
+              "is_admin": true,
+              "permissions": [
+                {
+                  "id": 1,
+                  "key": "users.read",
+                  "value": "Read users"
+                }
+              ]
+            }
+          ]
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/roles",
+      "method": "POST",
+      "permission": "roles.create",
+      "content_type": "application/json",
+      "request": {
+        "role": {
+          "name": "Supervisor",
+          "code": "supervisor",
+          "description": "Supervisor role"
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Role created",
+        "data": {
+          "role": {
+            "id": 2,
+            "name": "Supervisor",
+            "code": "supervisor",
+            "description": "Supervisor role",
+            "is_admin": false,
+            "permissions": []
+          }
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/roles/:id",
+      "method": "GET",
+      "permission": "roles.read",
+      "content_type": "application/json",
+      "request": {},
+      "response": {
+        "success": true,
+        "message": "Fetch successful",
+        "data": {
+          "role": {
+            "id": 1,
+            "name": "Administrator",
+            "code": "admin",
+            "description": "System administrator",
+            "is_admin": true,
+            "permissions": [
+              {
+                "id": 1,
+                "key": "users.read",
+                "value": "Read users"
+              }
+            ]
+          }
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/roles/:id",
+      "method": "PATCH",
+      "permission": "roles.update",
+      "content_type": "application/json",
+      "request": {
+        "role": {
+          "name": "Supervisor",
+          "code": "supervisor",
+          "description": "Updated description"
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Role updated",
+        "data": {
+          "role": {
+            "id": 2,
+            "name": "Supervisor",
+            "code": "supervisor",
+            "description": "Updated description",
+            "is_admin": false,
+            "permissions": []
+          }
+        },
+        "errors": null
+      },
+      "notes": [
+        "Bootstrap admin role cannot change name or code."
+      ]
+    },
+    {
+      "path": "api/v1/roles/:id",
+      "method": "PUT",
+      "permission": "roles.update",
+      "content_type": "application/json",
+      "request": {
+        "role": {
+          "name": "Supervisor",
+          "code": "supervisor",
+          "description": "Updated description"
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "Role updated",
+        "data": {
+          "role": {
+            "id": 2,
+            "name": "Supervisor",
+            "code": "supervisor",
+            "description": "Updated description",
+            "is_admin": false,
+            "permissions": []
+          }
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/roles/:id",
+      "method": "DELETE",
+      "permission": "roles.delete",
+      "content_type": "application/json",
+      "request": {},
+      "response": {
+        "success": true,
+        "message": "Role deleted",
+        "data": {
+          "id": 2
+        },
+        "errors": null
+      },
+      "notes": [
+        "Bootstrap admin role cannot be deleted."
+      ]
+    },
+    {
+      "path": "api/v1/roles/:id/permissions",
+      "method": "PUT",
+      "permission": "roles.assign_permissions",
+      "content_type": "application/json",
+      "request": {
+        "permission_ids": [1, 2]
+      },
+      "response": {
+        "success": true,
+        "message": "Permission assigned successfully",
+        "data": {
+          "role": {
+            "id": 2,
+            "name": "Supervisor",
+            "code": "supervisor",
+            "description": "Supervisor role",
+            "is_admin": false,
+            "permissions": [
+              {
+                "id": 1,
+                "key": "users.read",
+                "value": "Read users"
+              },
+              {
+                "id": 2,
+                "key": "roles.read",
+                "value": "Read roles"
+              }
+            ]
+          }
+        },
+        "errors": null
+      },
+      "notes": [
+        "Bootstrap admin role must keep at least one permission."
+      ]
+    }
+  ]
+}

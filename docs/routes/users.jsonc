@@ -1,0 +1,269 @@
+{
+  "group": "users",
+  "base_path": "api/v1",
+  "auth_required": true,
+  "headers": {
+    "Authorization": "Bearer <access_token>"
+  },
+  "routes": [
+    {
+      "path": "api/v1/users",
+      "method": "GET",
+      "permission": "users.read",
+      "content_type": "application/json",
+      "request": {},
+      "response": {
+        "success": true,
+        "message": "Fetch successful",
+        "data": {
+          "users": [
+            {
+              "id": 1,
+              "name": "Thanh Ba",
+              "email": "thanhba@example.com",
+              "is_admin": false,
+              "settings": {
+                "icon_size": "medium"
+              },
+              "avatar_id": null,
+              "avatar": null,
+              "avatar_url": null,
+              "background_id": null,
+              "background": null,
+              "background_url": null,
+              "roles": [
+                {
+                  "id": 2,
+                  "name": "User",
+                  "code": "user",
+                  "is_admin": false
+                }
+              ]
+            }
+          ]
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/users",
+      "method": "POST",
+      "permission": "users.create",
+      "content_type": "application/json",
+      "request": {
+        "user": {
+          "name": "Thanh Ba",
+          "email": "thanhba@example.com",
+          "password": "password123",
+          "password_confirmation": "password123",
+          "settings": {
+            "icon_size": "small"
+          }
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "User created",
+        "data": {
+          "user": {
+            "id": 1,
+            "name": "Thanh Ba",
+            "email": "thanhba@example.com",
+            "is_admin": false,
+            "settings": {
+              "icon_size": "small"
+            },
+            "avatar_id": null,
+            "avatar": null,
+            "avatar_url": null,
+            "background_id": null,
+            "background": null,
+            "background_url": null,
+            "roles": []
+          }
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/users/:id",
+      "method": "GET",
+      "permission": "users.read",
+      "content_type": "application/json",
+      "request": {},
+      "response": {
+        "success": true,
+        "message": "Fetch successful",
+        "data": {
+          "user": {
+            "id": 1,
+            "name": "Thanh Ba",
+            "email": "thanhba@example.com",
+            "is_admin": false,
+            "settings": {
+              "icon_size": "medium"
+            },
+            "avatar_id": null,
+            "avatar": null,
+            "avatar_url": null,
+            "background_id": null,
+            "background": null,
+            "background_url": null,
+            "roles": []
+          }
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/users/:id",
+      "method": "PATCH",
+      "permission": "users.update",
+      "content_type": "application/json",
+      "request": {
+        "user": {
+          "name": "Updated Name",
+          "email": "updated@example.com",
+          "password": "new-password123",
+          "password_confirmation": "new-password123",
+          "settings": {
+            "icon_size": "large"
+          }
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "User updated",
+        "data": {
+          "user": {
+            "id": 1,
+            "name": "Updated Name",
+            "email": "updated@example.com",
+            "is_admin": false,
+            "settings": {
+              "icon_size": "large"
+            },
+            "avatar_id": null,
+            "avatar": null,
+            "avatar_url": null,
+            "background_id": null,
+            "background": null,
+            "background_url": null,
+            "roles": []
+          }
+        },
+        "errors": null
+      },
+      "notes": [
+        "Bootstrap admin user can only change password.",
+        "For bootstrap admin, name and email updates return 422."
+      ]
+    },
+    {
+      "path": "api/v1/users/:id",
+      "method": "PUT",
+      "permission": "users.update",
+      "content_type": "application/json",
+      "request": {
+        "user": {
+          "name": "Updated Name",
+          "email": "updated@example.com",
+          "password": "new-password123",
+          "password_confirmation": "new-password123",
+          "settings": {
+            "icon_size": "large"
+          }
+        }
+      },
+      "response": {
+        "success": true,
+        "message": "User updated",
+        "data": {
+          "user": {
+            "id": 1,
+            "name": "Updated Name",
+            "email": "updated@example.com",
+            "is_admin": false,
+            "settings": {
+              "icon_size": "large"
+            },
+            "avatar_id": null,
+            "avatar": null,
+            "avatar_url": null,
+            "background_id": null,
+            "background": null,
+            "background_url": null,
+            "roles": []
+          }
+        },
+        "errors": null
+      }
+    },
+    {
+      "path": "api/v1/users/:id",
+      "method": "DELETE",
+      "permission": "users.delete",
+      "content_type": "application/json",
+      "request": {},
+      "response": {
+        "success": true,
+        "message": "User deleted",
+        "data": {
+          "id": 1
+        },
+        "errors": null
+      },
+      "notes": [
+        "Bootstrap admin user cannot be deleted and returns 422."
+      ]
+    },
+    {
+      "path": "api/v1/users/:id/roles",
+      "method": "PUT",
+      "permission": "users.assign_roles",
+      "content_type": "application/json",
+      "request": {
+        "role_ids": [1, 2]
+      },
+      "response": {
+        "success": true,
+        "message": "Role assigned successfully",
+        "data": {
+          "user": {
+            "id": 1,
+            "name": "Thanh Ba",
+            "email": "thanhba@example.com",
+            "is_admin": false,
+            "settings": {
+              "icon_size": "medium"
+            },
+            "avatar_id": null,
+            "avatar": null,
+            "avatar_url": null,
+            "background_id": null,
+            "background": null,
+            "background_url": null,
+            "roles": [
+              {
+                "id": 1,
+                "name": "Administrator",
+                "code": "admin",
+                "is_admin": true
+              },
+              {
+                "id": 2,
+                "name": "User",
+                "code": "user",
+                "is_admin": false
+              }
+            ]
+          }
+        },
+        "errors": null
+      },
+      "notes": [
+        "Bootstrap admin user must keep at least one admin role."
+      ]
+    }
+  ]
+}
