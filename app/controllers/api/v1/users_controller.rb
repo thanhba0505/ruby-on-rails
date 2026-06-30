@@ -36,7 +36,9 @@ module Api
           )
         end
 
-        @user.update!(user_update_params)
+        @user.assign_attributes(user_update_params)
+        assign_settings_attributes(@user, user_settings_params)
+        @user.save!
         render_success(data: { user: user_payload(@user) }, message: I18n.t("users.updated"))
       end
 
@@ -83,7 +85,7 @@ module Api
       end
 
       def user_create_params
-        params.require(:user).permit(:name, :email, :password, :password_confirmation)
+        params.require(:user).permit(:name, :email, :password, :password_confirmation, settings: [ :icon_size ])
       end
 
       def user_update_params
@@ -93,9 +95,19 @@ module Api
         permitted.slice(:password, :password_confirmation)
       end
 
+      def user_settings_params
+        params.fetch(:user, ActionController::Parameters.new).permit(settings: [ :icon_size ]).fetch(:settings, {})
+      end
+
       def admin_user_forbidden_update?
         incoming = params.require(:user).permit(:name, :email, :password, :password_confirmation)
         incoming.key?(:name) || incoming.key?(:email)
+      end
+
+      def assign_settings_attributes(user, settings_attrs)
+        return if settings_attrs.blank?
+
+        user.icon_size = settings_attrs[:icon_size] if settings_attrs.key?(:icon_size)
       end
 
       def user_payload(user)

@@ -15,6 +15,7 @@ class UserPayloadBuilder
       name: @user.name,
       email: @user.email,
       is_admin: @user.is_admin,
+      settings: settings_payload,
       avatar_id: @user.avatar_id,
       avatar: file_payload(@user.avatar),
       avatar_url: file_url(@user.avatar),
@@ -34,6 +35,12 @@ class UserPayloadBuilder
     return if file&.deleted?
 
     file&.payload
+  end
+
+  def settings_payload
+    {
+      icon_size: @user.icon_size
+    }
   end
 
   def file_url(file)

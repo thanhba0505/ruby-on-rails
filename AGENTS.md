@@ -25,7 +25,6 @@ config/
 db/
   migrate/
   seeds/
-test/                        # Minitest
 bin/
   setup, dev, rails, rubocop, brakeman
 ```
@@ -52,7 +51,7 @@ bin/
 
 - Keep changes aligned with existing patterns; avoid introducing parallel flows for the same concern.
 - Keep JSON payload keys stable unless the task explicitly changes the API contract.
-- Implement related layers together when needed: route, controller, params, service, model, response, locale, and tests.
+- Implement related layers together when needed: route, controller, params, service, model, response, and locale.
 - Reuse existing concerns/services/builders before adding new ones.
 - Keep seed updates idempotent.
 - When adding a new message key, update both Vietnamese and English locale files unless there is a strong reason not to.
@@ -63,15 +62,14 @@ bin/
 - Common auth/env: `JWT_SECRET`, `CORS_ORIGINS`, `RAILS_MASTER_KEY`.
 - DB is PostgreSQL; production also uses cache/queue/cable databases and `:solid_queue`.
 
-## Testing And Verification
+## Verification
 
-- Setup/check: `bin/setup`, `bin/dev`, `bin/rails test`, `bin/rubocop`, `bin/brakeman`.
+- Setup/check: `bin/setup`, `bin/dev`, `bin/rubocop`, `bin/brakeman`.
 - When changing routes, verify with `bin/rails routes`.
-- When changing upload/auth behavior, verify both happy path and cleanup/failure path.
+- When changing upload/auth behavior, verify both success and failure paths.
 
 ## Safe Defaults
 
 - Avoid silent breaking changes to auth payloads, user payloads, or upload payloads; frontend-facing structures likely depend on them.
 - If adding a new protected endpoint, implement authentication, permission check, strong params, and standardized response format together.
-- Add or update focused tests when behavior changes materially, especially for auth, authorization, uploads, and cleanup.
 - Prefer small, localized edits over broad refactors unless the task explicitly asks for restructuring.

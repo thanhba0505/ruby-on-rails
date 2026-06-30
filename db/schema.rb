@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_30_130000) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_30_210000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -136,6 +136,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_30_130000) do
     t.boolean "is_admin", default: false, null: false
     t.string "name", null: false
     t.string "password_digest", null: false
+    t.jsonb "settings", default: {}, null: false
     t.datetime "updated_at", null: false
     t.index [ "avatar_id" ], name: "index_users_on_avatar_id"
     t.index [ "background_id" ], name: "index_users_on_background_id"

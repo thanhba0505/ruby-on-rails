@@ -29,3 +29,13 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    attributes:
+      user:
+        icon_size: "Icon size"
+    errors:
+      models:
+        user:
+          attributes:
+            icon_size:
+              invalid_icon_size: "must be one of: small, medium, large"

@@ -16,6 +16,7 @@ vi:
         email: "Email"
         password: "Mật khẩu"
         password_confirmation: "Xác nhận mật khẩu"
+        icon_size: "Kích thước icon"
       role:
         name: "Tên"
         code: "Mã"
@@ -24,3 +25,9 @@ vi:
         key: "Mã quyền"
         value: "Tên quyền"
         description: "Mô tả"
+    errors:
+      models:
+        user:
+          attributes:
+            icon_size:
+              invalid_icon_size: "chỉ chấp nhận small, medium hoặc large"

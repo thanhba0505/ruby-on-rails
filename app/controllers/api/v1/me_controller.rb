@@ -20,6 +20,7 @@ module Api
         apply_profile_asset_changes(profile_attrs, previous_files, uploaded_files, files_to_remove)
 
         current_user.assign_attributes(name: profile_attrs[:name]) if profile_attrs.key?(:name)
+        assign_settings_attributes(current_user, profile_attrs[:settings])
         current_user.save!
 
         cleanup_removed_files(files_to_remove)
@@ -32,7 +33,7 @@ module Api
       private
 
       def me_update_params
-        params.require(:user).permit(:name, :avatar, :background, :remove_avatar, :remove_background)
+        params.require(:user).permit(:name, :avatar, :background, :remove_avatar, :remove_background, settings: [ :icon_size ])
       end
 
       def upload_profile_assets(profile_attrs, uploaded_files)
@@ -104,6 +105,12 @@ module Api
 
       def boolean_param(value)
         ActiveModel::Type::Boolean.new.cast(value)
+      end
+
+      def assign_settings_attributes(user, settings_attrs)
+        return if settings_attrs.blank?
+
+        user.icon_size = settings_attrs[:icon_size] if settings_attrs.key?(:icon_size)
       end
 
       def user_payload(user)
