@@ -9,6 +9,8 @@ permission_seeds = [
   { key: "roles.update", value: "Cập nhật vai trò" },
   { key: "roles.delete", value: "Xóa vai trò" },
   { key: "roles.assign_permissions", value: "Gán quyền cho vai trò" },
+  { key: "apps.read", value: "Xem ứng dụng" },
+  { key: "apps.update", value: "Cập nhật ứng dụng" },
   { key: "permissions.read", value: "Xem quyền" },
   { key: "permissions.create", value: "Tạo quyền" },
   { key: "permissions.update", value: "Cập nhật quyền" },

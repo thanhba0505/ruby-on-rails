@@ -24,6 +24,7 @@ Rails.application.routes.draw do
         end
       end
 
+      resources :apps, only: %i[index show update]
       resources :permissions
     end
   end

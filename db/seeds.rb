@@ -1,7 +1,7 @@
 seed_root = Rails.root.join("db", "seeds")
 available_seed_files = Dir[seed_root.join("*.rb")].map { |path| File.basename(path, ".rb") }.sort
-development_seed_files = %w[permissions admin_bootstrap]
-production_seed_files = %w[permissions admin_bootstrap]
+development_seed_files = %w[permissions apps admin_bootstrap]
+production_seed_files = %w[permissions apps admin_bootstrap]
 
 selected_seed_files =
   if Rails.env.production?

@@ -4,6 +4,10 @@ class User < ApplicationRecord
   has_many :user_roles, dependent: :destroy
   has_many :roles, through: :user_roles
   has_many :permissions, -> { distinct }, through: :roles
+  has_many :user_desktop_apps, dependent: :destroy
+  has_many :desktop_apps, through: :user_desktop_apps, source: :app
+  has_many :user_taskbar_apps, dependent: :destroy
+  has_many :taskbar_apps, through: :user_taskbar_apps, source: :app
 
   before_validation :normalize_email
 
