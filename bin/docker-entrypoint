@@ -9,6 +9,12 @@ fi
 # If running the rails server then create or migrate existing database
 if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
   ./bin/rails db:prepare
+  
+  # Seed production database with essential data
+  # Note: This should be idempotent - only create data if it doesn't exist
+  # For example: create admin user, default roles, etc.
+  echo "Seeding production database..."
+  ./bin/rails db:seed
 fi
 
 exec "${@}"

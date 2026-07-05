@@ -22,8 +22,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_05_040000) do
     t.boolean "is_active", default: true, null: false
     t.string "name", null: false
     t.datetime "updated_at", null: false
-    t.index [ "code" ], name: "index_apps_on_code", unique: true
-    t.index [ "name" ], name: "index_apps_on_name", unique: true
+    t.index ["code"], name: "index_apps_on_code", unique: true
+    t.index ["name"], name: "index_apps_on_name", unique: true
   end
 
   create_table "permissions", force: :cascade do |t|
@@ -32,7 +32,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_05_040000) do
     t.string "key", null: false
     t.datetime "updated_at", null: false
     t.string "value", null: false
-    t.index [ "key" ], name: "index_permissions_on_key", unique: true
+    t.index ["key"], name: "index_permissions_on_key", unique: true
   end
 
   create_table "refresh_tokens", force: :cascade do |t|
@@ -44,11 +44,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_05_040000) do
     t.string "token_digest", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
-    t.index [ "expires_at" ], name: "index_refresh_tokens_on_expires_at"
-    t.index [ "jti" ], name: "index_refresh_tokens_on_jti", unique: true
-    t.index [ "revoked_at" ], name: "index_refresh_tokens_on_revoked_at"
-    t.index [ "token_digest" ], name: "index_refresh_tokens_on_token_digest", unique: true
-    t.index [ "user_id" ], name: "index_refresh_tokens_on_user_id"
+    t.index ["expires_at"], name: "index_refresh_tokens_on_expires_at"
+    t.index ["jti"], name: "index_refresh_tokens_on_jti", unique: true
+    t.index ["revoked_at"], name: "index_refresh_tokens_on_revoked_at"
+    t.index ["token_digest"], name: "index_refresh_tokens_on_token_digest", unique: true
+    t.index ["user_id"], name: "index_refresh_tokens_on_user_id"
   end
 
   create_table "role_permissions", force: :cascade do |t|
@@ -56,9 +56,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_05_040000) do
     t.bigint "permission_id", null: false
     t.bigint "role_id", null: false
     t.datetime "updated_at", null: false
-    t.index [ "permission_id" ], name: "index_role_permissions_on_permission_id"
-    t.index [ "role_id", "permission_id" ], name: "index_role_permissions_on_role_id_and_permission_id", unique: true
-    t.index [ "role_id" ], name: "index_role_permissions_on_role_id"
+    t.index ["permission_id"], name: "index_role_permissions_on_permission_id"
+    t.index ["role_id", "permission_id"], name: "index_role_permissions_on_role_id_and_permission_id", unique: true
+    t.index ["role_id"], name: "index_role_permissions_on_role_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -68,8 +68,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_05_040000) do
     t.boolean "is_admin", default: false, null: false
     t.string "name", null: false
     t.datetime "updated_at", null: false
-    t.index [ "code" ], name: "index_roles_on_code", unique: true
-    t.index [ "is_admin" ], name: "index_roles_on_is_admin"
+    t.index ["code"], name: "index_roles_on_code", unique: true
+    t.index ["is_admin"], name: "index_roles_on_is_admin"
   end
 
   create_table "uploaded_files", force: :cascade do |t|
@@ -89,8 +89,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_05_040000) do
     t.datetime "updated_at", null: false
     t.text "url"
     t.integer "width"
-    t.index [ "deleted_at" ], name: "index_uploaded_files_on_deleted_at"
-    t.index [ "provider", "public_id" ], name: "index_uploaded_files_on_provider_and_public_id", unique: true
+    t.index ["deleted_at"], name: "index_uploaded_files_on_deleted_at"
+    t.index ["provider", "public_id"], name: "index_uploaded_files_on_provider_and_public_id", unique: true
   end
 
   create_table "user_desktop_apps", force: :cascade do |t|
@@ -99,10 +99,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_05_040000) do
     t.integer "position", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
-    t.index [ "app_id" ], name: "index_user_desktop_apps_on_app_id"
-    t.index [ "user_id", "app_id" ], name: "index_user_desktop_apps_on_user_id_and_app_id", unique: true
-    t.index [ "user_id", "position" ], name: "index_user_desktop_apps_on_user_id_and_position", unique: true
-    t.index [ "user_id" ], name: "index_user_desktop_apps_on_user_id"
+    t.index ["app_id"], name: "index_user_desktop_apps_on_app_id"
+    t.index ["user_id", "app_id"], name: "index_user_desktop_apps_on_user_id_and_app_id", unique: true
+    t.index ["user_id", "position"], name: "index_user_desktop_apps_on_user_id_and_position", unique: true
+    t.index ["user_id"], name: "index_user_desktop_apps_on_user_id"
   end
 
   create_table "user_roles", force: :cascade do |t|
@@ -110,9 +110,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_05_040000) do
     t.bigint "role_id", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
-    t.index [ "role_id" ], name: "index_user_roles_on_role_id"
-    t.index [ "user_id", "role_id" ], name: "index_user_roles_on_user_id_and_role_id", unique: true
-    t.index [ "user_id" ], name: "index_user_roles_on_user_id"
+    t.index ["role_id"], name: "index_user_roles_on_role_id"
+    t.index ["user_id", "role_id"], name: "index_user_roles_on_user_id_and_role_id", unique: true
+    t.index ["user_id"], name: "index_user_roles_on_user_id"
   end
 
   create_table "user_taskbar_apps", force: :cascade do |t|
@@ -121,10 +121,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_05_040000) do
     t.integer "position", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
-    t.index [ "app_id" ], name: "index_user_taskbar_apps_on_app_id"
-    t.index [ "user_id", "app_id" ], name: "index_user_taskbar_apps_on_user_id_and_app_id", unique: true
-    t.index [ "user_id", "position" ], name: "index_user_taskbar_apps_on_user_id_and_position", unique: true
-    t.index [ "user_id" ], name: "index_user_taskbar_apps_on_user_id"
+    t.index ["app_id"], name: "index_user_taskbar_apps_on_app_id"
+    t.index ["user_id", "app_id"], name: "index_user_taskbar_apps_on_user_id_and_app_id", unique: true
+    t.index ["user_id", "position"], name: "index_user_taskbar_apps_on_user_id_and_position", unique: true
+    t.index ["user_id"], name: "index_user_taskbar_apps_on_user_id"
     t.check_constraint "\"position\" > 0", name: "position_positive"
   end
 
@@ -138,9 +138,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_05_040000) do
     t.string "password_digest", null: false
     t.jsonb "settings", default: {}, null: false
     t.datetime "updated_at", null: false
-    t.index [ "avatar_id" ], name: "index_users_on_avatar_id"
-    t.index [ "background_id" ], name: "index_users_on_background_id"
-    t.index [ "email" ], name: "index_users_on_email", unique: true
+    t.index ["avatar_id"], name: "index_users_on_avatar_id"
+    t.index ["background_id"], name: "index_users_on_background_id"
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "refresh_tokens", "users"
