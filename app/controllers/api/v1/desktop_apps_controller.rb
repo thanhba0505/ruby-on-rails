@@ -4,23 +4,21 @@ module Api
       before_action :authenticate_user!
 
       def index
-        desktop_apps = current_user.user_desktop_apps.includes(:app).order(:grid_y, :grid_x)
+        desktop_apps = current_user.user_desktop_apps.includes(:app).order(:position)
         render_success(data: { desktop_apps: desktop_apps.map { |record| desktop_app_payload(record) } })
       end
 
       def create
         attrs = desktop_app_create_params
         app_id = attrs.fetch(:app_id).to_i
-        grid_x = Integer(attrs.fetch(:grid_x))
-        grid_y = Integer(attrs.fetch(:grid_y))
+        position = Integer(attrs.fetch(:position))
 
-        if current_user.user_desktop_apps.where(grid_x: grid_x, grid_y: grid_y).where.not(app_id: app_id).exists?
+        if current_user.user_desktop_apps.where(position: position).where.not(app_id: app_id).exists?
           return render_error(message: I18n.t("common.invalid_params"), errors: [ "Unprocessable Entity" ], status: :unprocessable_entity)
         end
 
         record = current_user.user_desktop_apps.find_or_initialize_by(app_id: app_id)
-        record.grid_x = grid_x
-        record.grid_y = grid_y
+        record.position = position
         record.save!
 
         render_success(data: { desktop_app: desktop_app_payload(record.reload) }, status: :created)
@@ -30,16 +28,13 @@ module Api
 
       def update
         record = current_user.user_desktop_apps.find_by!(app_id: params[:app_id])
+        position = Integer(desktop_app_update_params.fetch(:position))
 
-        attrs = desktop_app_update_params
-        grid_x = Integer(attrs.fetch(:grid_x))
-        grid_y = Integer(attrs.fetch(:grid_y))
-
-        if current_user.user_desktop_apps.where(grid_x: grid_x, grid_y: grid_y).where.not(app_id: record.app_id).exists?
+        if current_user.user_desktop_apps.where(position: position).where.not(app_id: record.app_id).exists?
           return render_error(message: I18n.t("common.invalid_params"), errors: [ "Unprocessable Entity" ], status: :unprocessable_entity)
         end
 
-        record.update!(grid_x: grid_x, grid_y: grid_y)
+        record.update!(position: position)
         render_success(data: { desktop_app: desktop_app_payload(record.reload) })
       rescue ActionController::ParameterMissing, KeyError, TypeError, ArgumentError
         render_error(message: I18n.t("common.invalid_params"), errors: [ "Unprocessable Entity" ], status: :unprocessable_entity)
@@ -61,18 +56,14 @@ module Api
           return render_error(message: I18n.t("common.invalid_params"), errors: [ "Unprocessable Entity" ], status: :unprocessable_entity)
         end
 
-        grid_positions = current_user.user_desktop_apps.pluck(:app_id, :grid_x, :grid_y).to_h do |app_id, grid_x, grid_y|
-          [ app_id, [ grid_x, grid_y ] ]
-        end
-
+        positions = current_user.user_desktop_apps.pluck(:app_id, :position).to_h
         updates.each do |item|
           app_id = item.fetch(:app_id).to_i
-          grid_x = Integer(item.fetch(:grid_x))
-          grid_y = Integer(item.fetch(:grid_y))
-          grid_positions[app_id] = [ grid_x, grid_y ]
+          position = Integer(item.fetch(:position))
+          positions[app_id] = position
         end
 
-        positions_only = grid_positions.values
+        positions_only = positions.values
         if positions_only.uniq.size != positions_only.size
           return render_error(message: I18n.t("common.invalid_params"), errors: [ "Unprocessable Entity" ], status: :unprocessable_entity)
         end
@@ -81,11 +72,11 @@ module Api
           updates.each do |item|
             app_id = item.fetch(:app_id).to_i
             record = records.fetch(app_id)
-            record.update!(grid_x: Integer(item.fetch(:grid_x)), grid_y: Integer(item.fetch(:grid_y)))
+            record.update!(position: Integer(item.fetch(:position)))
           end
         end
 
-        desktop_apps = current_user.user_desktop_apps.includes(:app).order(:grid_y, :grid_x)
+        desktop_apps = current_user.user_desktop_apps.includes(:app).order(:position)
         render_success(data: { desktop_apps: desktop_apps.map { |record| desktop_app_payload(record) } })
       rescue ActionController::ParameterMissing, KeyError, TypeError, ArgumentError
         render_error(message: I18n.t("common.invalid_params"), errors: [ "Unprocessable Entity" ], status: :unprocessable_entity)
@@ -94,19 +85,18 @@ module Api
       private
 
       def desktop_app_create_params
-        params.require(:desktop_app).permit(:app_id, :grid_x, :grid_y)
+        params.require(:desktop_app).permit(:app_id, :position)
       end
 
       def desktop_app_update_params
-        params.require(:desktop_app).permit(:grid_x, :grid_y)
+        params.require(:desktop_app).permit(:position)
       end
 
       def desktop_app_payload(record)
         {
           id: record.id,
           app: app_payload(record.app),
-          grid_x: record.grid_x,
-          grid_y: record.grid_y
+          position: record.position
         }
       end
 

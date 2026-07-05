@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_30_210000) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_05_040000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -96,13 +96,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_30_210000) do
   create_table "user_desktop_apps", force: :cascade do |t|
     t.bigint "app_id", null: false
     t.datetime "created_at", null: false
-    t.integer "grid_x", null: false
-    t.integer "grid_y", null: false
+    t.integer "position", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index [ "app_id" ], name: "index_user_desktop_apps_on_app_id"
     t.index [ "user_id", "app_id" ], name: "index_user_desktop_apps_on_user_id_and_app_id", unique: true
-    t.index [ "user_id", "grid_x", "grid_y" ], name: "index_user_desktop_apps_on_user_id_and_grid_x_and_grid_y", unique: true
+    t.index [ "user_id", "position" ], name: "index_user_desktop_apps_on_user_id_and_position", unique: true
     t.index [ "user_id" ], name: "index_user_desktop_apps_on_user_id"
   end
 
@@ -126,6 +125,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_30_210000) do
     t.index [ "user_id", "app_id" ], name: "index_user_taskbar_apps_on_user_id_and_app_id", unique: true
     t.index [ "user_id", "position" ], name: "index_user_taskbar_apps_on_user_id_and_position", unique: true
     t.index [ "user_id" ], name: "index_user_taskbar_apps_on_user_id"
+    t.check_constraint "\"position\" > 0", name: "position_positive"
   end
 
   create_table "users", force: :cascade do |t|

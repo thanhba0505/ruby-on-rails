@@ -21,7 +21,7 @@
             "email": "thanhba@example.com",
             "is_admin": false,
             "settings": {
-              "icon_size": "medium"
+              "icon_size": "medium" // small, medium, large
             },
             "avatar_id": null,
             "avatar": null,
@@ -165,8 +165,7 @@
                 "description": "Calendar app",
                 "is_active": true
               },
-              "grid_x": 0,
-              "grid_y": 0
+              "position": 1
             }
           ]
         },
@@ -180,8 +179,7 @@
       "request": {
         "desktop_app": {
           "app_id": 1,
-          "grid_x": 0,
-          "grid_y": 0
+          "position": 1
         }
       },
       "response": {
@@ -198,8 +196,7 @@
               "description": "Calendar app",
               "is_active": true
             },
-            "grid_x": 0,
-            "grid_y": 0
+            "position": 1
           }
         },
         "errors": null
@@ -211,8 +208,7 @@
       "content_type": "application/json",
       "request": {
         "desktop_app": {
-          "grid_x": 1,
-          "grid_y": 2
+          "position": 1
         }
       },
       "response": {
@@ -229,8 +225,7 @@
               "description": "Calendar app",
               "is_active": true
             },
-            "grid_x": 1,
-            "grid_y": 2
+            "position": 1
           }
         },
         "errors": null
@@ -242,8 +237,7 @@
       "content_type": "application/json",
       "request": {
         "desktop_app": {
-          "grid_x": 1,
-          "grid_y": 2
+          "position": 1
         }
       },
       "response": {
@@ -260,8 +254,7 @@
               "description": "Calendar app",
               "is_active": true
             },
-            "grid_x": 1,
-            "grid_y": 2
+            "position": 1
           }
         },
         "errors": null
@@ -289,13 +282,11 @@
         "desktop_apps": [
           {
             "app_id": 1,
-            "grid_x": 0,
-            "grid_y": 0
+            "position": 1
           },
           {
             "app_id": 2,
-            "grid_x": 1,
-            "grid_y": 0
+            "position": 2
           }
         ]
       },
@@ -314,8 +305,7 @@
                 "description": "Calendar app",
                 "is_active": true
               },
-              "grid_x": 0,
-              "grid_y": 0
+              "position": 1
             }
           ]
         },
@@ -330,13 +320,11 @@
         "desktop_apps": [
           {
             "app_id": 1,
-            "grid_x": 0,
-            "grid_y": 0
+            "position": 1
           },
           {
             "app_id": 2,
-            "grid_x": 1,
-            "grid_y": 0
+            "position": 2
           }
         ]
       },
@@ -355,8 +343,7 @@
                 "description": "Calendar app",
                 "is_active": true
               },
-              "grid_x": 0,
-              "grid_y": 0
+              "position": 1
             }
           ]
         },
@@ -383,7 +370,7 @@
                 "description": "Calendar app",
                 "is_active": true
               },
-              "position": 0
+              "position": 1
             }
           ]
         },
@@ -397,7 +384,7 @@
       "request": {
         "taskbar_app": {
           "app_id": 1,
-          "position": 0
+          "position": 1
         }
       },
       "response": {
@@ -414,7 +401,7 @@
               "description": "Calendar app",
               "is_active": true
             },
-            "position": 0
+            "position": 1
           }
         },
         "errors": null
@@ -500,11 +487,11 @@
         "taskbar_apps": [
           {
             "app_id": 1,
-            "position": 0
+            "position": 1
           },
           {
             "app_id": 2,
-            "position": 1
+            "position": 2
           }
         ]
       },
@@ -523,7 +510,7 @@
                 "description": "Calendar app",
                 "is_active": true
               },
-              "position": 0
+              "position": 1
             }
           ]
         },
@@ -538,11 +525,11 @@
         "taskbar_apps": [
           {
             "app_id": 1,
-            "position": 0
+            "position": 1
           },
           {
             "app_id": 2,
-            "position": 1
+            "position": 2
           }
         ]
       },
@@ -561,7 +548,7 @@
                 "description": "Calendar app",
                 "is_active": true
               },
-              "position": 0
+              "position": 1
             }
           ]
         },
