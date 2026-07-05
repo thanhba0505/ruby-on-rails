@@ -6,6 +6,10 @@ class App < ApplicationRecord
 
   validates :code, presence: true, uniqueness: { case_sensitive: false }
   validates :name, presence: true, uniqueness: { case_sensitive: false }
+  validates :requires_permission, inclusion: { in: [true, false] }
+
+  scope :requires_permission, -> { where(requires_permission: true) }
+  scope :no_permission_required, -> { where(requires_permission: false) }
 
   private
 

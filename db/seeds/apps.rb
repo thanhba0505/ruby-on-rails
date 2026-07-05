@@ -1,7 +1,7 @@
 app_seeds = [
-  { code: "app", name: "App", icon: "app", description: "App management", is_active: true },
-  { code: "user", name: "User", icon: "user", description: "User management", is_active: true },
-  { code: "role", name: "Role", icon: "shield", description: "Role management", is_active: true }
+  { code: "app", name: "App", icon: "app", description: "App management", is_active: true, requires_permission: true },
+  { code: "user", name: "User", icon: "user", description: "User management", is_active: true, requires_permission: true },
+  { code: "role", name: "Role", icon: "shield", description: "Role management", is_active: true, requires_permission: true }
 ]
 
 ActiveRecord::Base.transaction do

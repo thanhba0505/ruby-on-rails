@@ -8,6 +8,7 @@ module Api
         return unless authorize_permission!("apps.read")
 
         apps = App.order(:name)
+        apps = filter_by_requires_permission(apps) if params[:requires_permission].present?
         desktop_app_ids, taskbar_app_ids = current_user_app_placement_ids
         render_success(data: { apps: apps.map { |app| app_payload(app, desktop_app_ids:, taskbar_app_ids:) } })
       end
@@ -37,7 +38,7 @@ module Api
       end
 
       def app_params
-        params.require(:app).permit(:name, :icon, :description, :is_active)
+        params.require(:app).permit(:name, :icon, :description, :is_active, :requires_permission)
       end
 
       def current_user_app_placement_ids
@@ -45,6 +46,17 @@ module Api
           current_user.user_desktop_apps.pluck(:app_id),
           current_user.user_taskbar_apps.pluck(:app_id)
         ]
+      end
+
+      def filter_by_requires_permission(apps)
+        case params[:requires_permission].to_s.downcase
+        when "true", "1", "yes"
+          apps.requires_permission
+        when "false", "0", "no"
+          apps.no_permission_required
+        else
+          apps
+        end
       end
 
       def app_payload(app, desktop_app_ids:, taskbar_app_ids:)
@@ -55,6 +67,7 @@ module Api
           icon: app.icon,
           description: app.description,
           is_active: app.is_active,
+          requires_permission: app.requires_permission,
           placed_on_desktop: desktop_app_ids.include?(app.id),
           placed_on_taskbar: taskbar_app_ids.include?(app.id)
         }
