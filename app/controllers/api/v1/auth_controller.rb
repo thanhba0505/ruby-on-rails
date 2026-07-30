@@ -100,8 +100,7 @@ module Api
         {
           id: user.id,
           name: user.name,
-          email: user.email,
-          is_admin: user.is_admin
+          email: user.email
         }
       end
     end

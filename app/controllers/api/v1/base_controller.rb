@@ -3,7 +3,13 @@ module Api
     class BaseController < ApplicationController
       include ApiResponse
       include ApiAuthentication
-      include ApiAuthorization
+
+      def require_admin!
+        return render_error(message: I18n.t("auth.unauthorized"), errors: [ "Unauthorized" ], status: :unauthorized) if current_user.nil?
+        return if current_user.bootstrap_admin?
+
+        render_error(message: I18n.t("auth.forbidden"), errors: [ "Forbidden" ], status: :forbidden)
+      end
 
       rescue_from ActiveRecord::RecordNotFound do
         render_error(message: I18n.t("errors.not_found"), errors: [ "Not Found" ], status: :not_found)

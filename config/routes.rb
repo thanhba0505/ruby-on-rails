@@ -12,19 +12,7 @@ Rails.application.routes.draw do
       post "auth/logout", to: "auth#logout"
       get "me", to: "me#show"
 
-      resources :users do
-        member do
-          put :roles
-        end
-      end
-
-      resources :roles do
-        member do
-          put :permissions
-        end
-      end
-
-      resources :permissions
+      resources :users
     end
   end
 

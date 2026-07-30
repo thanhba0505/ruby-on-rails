@@ -6,6 +6,7 @@ vi:
     refresh_failed: "Refresh token không hợp lệ"
     logout_success: "Đăng xuất thành công"
     unauthorized: "Chưa đăng nhập"
+    forbidden: "Bạn không có quyền thực hiện hành động này"
     missing_token: "Thiếu token"
     invalid_token: "Token không hợp lệ"
     token_expired: "Token hết hạn"

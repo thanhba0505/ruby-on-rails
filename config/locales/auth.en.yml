@@ -6,6 +6,7 @@ en:
     refresh_failed: "Invalid refresh token"
     logout_success: "Logged out"
     unauthorized: "Unauthorized"
+    forbidden: "Access denied"
     missing_token: "Missing token"
     invalid_token: "Invalid token"
     token_expired: "Token expired"
